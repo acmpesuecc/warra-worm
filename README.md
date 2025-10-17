@@ -151,3 +151,18 @@ This project is for defensive education: to understand how worms operate so you 
 
 ## License
 Educational use only. If you intend to redistribute or adapt, consult your instructor and institution policies and apply an appropriate license.
+
+## Logging
+
+All simulators support `--log-level` and an optional `--logfile`.
+
+Examples:
+
+# Run Abra simulator at INFO (default)
+python abra_simulator.py
+
+# Run with DEBUG logging:
+python abra_simulator.py --log-level DEBUG
+
+# Write logs to a rotating file
+python abra_simulator.py --log-level INFO --logfile ./logs/abra.log
