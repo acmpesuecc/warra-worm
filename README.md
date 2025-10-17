@@ -50,7 +50,30 @@ Example topology (private, isolated network recommended):
 
 Ensure SSH is running on all target hosts, accounts exist, and the network allows traffic among these IPs only.
 
+## Logging
+
+These scripts utilize Python's standard logging module for output. You can control the level of detail shown using the `--log-level` command-line flag.
+
+**Available Levels:**
+
+* `DEBUG`: Shows detailed step-by-step information, useful for troubleshooting.
+* `INFO`: Shows general progress messages (this is the default behavior).
+* `WARNING`: Shows potential issues or non-critical errors.
+* `ERROR`: Shows only errors that occurred.
+
+## Logging
+
+These scripts utilize Python's standard logging module for output. You can control the level of detail shown using the `--log-level` command-line flag.
+
+**Available Levels:**
+
+* `DEBUG`: Shows detailed step-by-step information, useful for troubleshooting.
+* `INFO`: Shows general progress messages (this is the default behavior).
+* `WARNING`: Shows potential issues or non-critical errors.
+* `ERROR`: Shows only errors that occurred.
+
 ## How Each Script Works
+python FooWorm.py
 
 ### FooVIrus.py (Local file infector)
 Purpose: minimal self-replicating infector without networking.
